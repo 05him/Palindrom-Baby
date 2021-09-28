@@ -161,30 +161,42 @@ let userDate = document.querySelector('#userInput');
 let p = document.querySelector('p');
 let frm = document.querySelector('form');
 let clrBtn = document.querySelector('.clear-btn');
+let gif = document.querySelector('.processing-gif');
+let footer = document.querySelector('footer');
+gif.style.display="none";
 clrBtn.addEventListener('click',()=>{
-    document.location.reload();
+   p.innerText="";
+   userDate.value="";
+   p.style.display="none";
 })
 frm.addEventListener('submit',(e)=>{
     e.preventDefault();
     checkDate.day=Number(userDate.value.split("-")[2]);
     checkDate.month=Number(userDate.value.split("-")[1]);
     checkDate.year = Number(userDate.value.split("-")[0]);
-    if(datePalin(checkDate)){
-        p.innerText="Yeee🤩🤩, You are a Palindrome Baby";
-    }
-     else{
-    let nextPalinResult=nextPalin(checkDate);
-    let prePalinResult = prePalin(checkDate);
-        if(nextPalinResult[0]<prePalinResult[0]){
-        p.innerText=`Naah u are not a Palindrome Baby😥. The closest Palindrome is in the future at ${nextPalinResult[0]} days that is  ${nextPalinResult[1].day}/${nextPalinResult[1].month}/${nextPalinResult[1].year}`;
-        }
-        else if (prePalinResult[0]<nextPalinResult[0]){
-        p.innerText=`Naah you are not a Palindrome Baby 😥 and nearest palindrome is in the past at ${prePalinResult[0]} days that is ${prePalinResult[1].day}/${prePalinResult[1].month}/${prePalinResult[1].year}`;
-        }
-          else if (prePalinResult[0]===nextPalinResult[0]){
-        p.innerText=`Naah you are not a Palindrome Baby 😥, there are 2 nearest palindrome on before one day and the other after one day`;
-        }
-    }
+    footer.style.marginTop="20vh";
+    gif.style.display="block";
+    p.innerText="Finding Palindrome with all the Nano Particles on the Earth"
+    setTimeout(()=>{
+        gif.style.display="none";
+        footer.style.marginTop="1rem";
+            if(datePalin(checkDate)){
+                p.innerText="Yeee🤩🤩, You are a Palindrome Baby";
+            }
+            else{
+            let nextPalinResult=nextPalin(checkDate);
+            let prePalinResult = prePalin(checkDate);
+                if(nextPalinResult[0]<prePalinResult[0]){
+                p.innerText=`Naah u are not a Palindrome Baby😥. The closest Palindrome is in the future at ${nextPalinResult[0]} days that is  ${nextPalinResult[1].month}/${nextPalinResult[1].day}/${nextPalinResult[1].year}`;
+                }
+                else if (prePalinResult[0]<nextPalinResult[0]){
+                p.innerText=`Naah you are not a Palindrome Baby 😥 and nearest palindrome is in the past at ${prePalinResult[0]} days that is ${prePalinResult[1].month}/${prePalinResult[1].day}/${prePalinResult[1].year}`;
+                }
+                else if (prePalinResult[0]===nextPalinResult[0]){
+                p.innerText=`Naah you are not a Palindrome Baby 😥, there are 2 nearest palindrome on before one day and the other after one day`;
+                }
+            }
+        },4000)
 })
 
 
